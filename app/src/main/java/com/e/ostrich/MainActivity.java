@@ -54,8 +54,8 @@ public void GPS(){
 
  if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
  ==PackageManager.PERMISSION_GRANTED) {
-     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 100, gpsLocationListener);
-     locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 100, 100, gpsLocationListener);
+     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, 5, gpsLocationListener);
+     locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 5, gpsLocationListener);
  }
 }
     final LocationListener gpsLocationListener = new LocationListener() {
