@@ -1,10 +1,12 @@
 package com.e.ostrich;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
@@ -14,6 +16,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -40,6 +44,8 @@ protected void onCreate(Bundle savedInstanceState) {
     GPS();
 //        Intent serviceIntent = new Intent(getApplicationContext(), GPSService.class);
 //        startService(serviceIntent);
+
+    popUp();
 }
 
 //권한 받기
@@ -137,7 +143,23 @@ protected void onPause(){
 protected  void onDestroy(){
         super.onDestroy();
         }
+
+public void popUp(){
+    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    builder.setTitle("이용수칙");
+    builder.setMessage("이용수칙 적어야 해요");
+    builder.setCancelable(true);
+    builder.setPositiveButton(android.R.string.ok,
+            new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+
+
+    AlertDialog alertDialog = builder.create();
+    alertDialog.show();
+        }
 }
-
-
-
