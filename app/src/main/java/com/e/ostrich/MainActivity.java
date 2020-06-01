@@ -146,8 +146,10 @@ protected  void onDestroy(){
 
 public void popUp(){
     AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    builder.setTitle("이용수칙");
-    builder.setMessage("이용수칙 적어야 해요");
+    builder.setTitle("개인용 이동장비 이용수칙");
+    builder.setMessage("- 전동킥보드·휠은 차도만, 안전모 착용 필수!\n" +
+            "* 안전모 미착용 적발 시 범침금 2만원 부과\n\n" +
+            "- 최고 속도는 시속 25km 이하로 제한!" );
     builder.setCancelable(true);
     builder.setPositiveButton(android.R.string.ok,
             new DialogInterface.OnClickListener() {
