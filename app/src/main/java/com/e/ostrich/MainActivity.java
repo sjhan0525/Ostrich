@@ -31,6 +31,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     int ALL_PERMISSIONS = 100;
+    int sizeNum = 0;
     TextView adText;
     BroadcastReceiver broadcastReceiver;
 
@@ -70,6 +71,9 @@ public void GPS(){
             double latitude, longitude;
             final String nowAddress;
 
+            sizeNum++;
+            Log.d("SIZENUM", String.valueOf(sizeNum));
+
             latitude = location.getLatitude();
             longitude = location.getLongitude();
 
@@ -77,7 +81,7 @@ public void GPS(){
             Geocoder mGeoCoder = new Geocoder(MainActivity.this, Locale.KOREA);
             List<Address> address;
 
-            map(latitude, longitude);
+            map(latitude, longitude, sizeNum);
 
             try {
                 if (mGeoCoder != null) {
@@ -109,7 +113,7 @@ public void GPS(){
         }
     };
 
-public void map(final double nowLat, final double nowLng){
+public void map(final double nowLat, final double nowLng, final int sizeNum){
     SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager()
             .findFragmentById(R.id.map);
     supportMapFragment.getMapAsync(new OnMapReadyCallback() {
@@ -119,12 +123,30 @@ public void map(final double nowLat, final double nowLng){
 
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(now));
             googleMap.animateCamera(CameraUpdateFactory.zoomTo(18));
-            googleMap.addCircle(new CircleOptions()
-                    .center(new LatLng(nowLat, nowLng))
-                    .radius(3)
-                    .strokeColor(0x000000)
-                    .fillColor(Color.parseColor("#A6ed7d31"))
-            );
+
+            if(sizeNum == 1){
+                googleMap.addCircle(new CircleOptions()
+                        .center(new LatLng(nowLat, nowLng))
+                        .radius(3)
+                        .strokeColor(0x000000)
+                        .fillColor(Color.parseColor("#A6ff0000"))
+                );
+            }else if (sizeNum%5==0){
+                googleMap.addCircle(new CircleOptions()
+                        .center(new LatLng(nowLat, nowLng))
+                        .radius(3)
+                        .strokeColor(0x000000)
+                        .fillColor(Color.parseColor("#A6ed7d31"))
+                );
+            }else{
+                googleMap.addCircle(new CircleOptions()
+                        .center(new LatLng(nowLat, nowLng))
+                        .radius(2)
+                        .strokeColor(0x000000)
+                        .fillColor(Color.parseColor("#A6ed7d31"))
+                );
+            }
+
         }
     });
 }
